@@ -12,7 +12,8 @@ After finish, VM will be restarted
 cd &&
 apt-get update -y &&
 apt-get install apt-transport-https &&
-apt-add-repository universe &&
+apt-get install software-properties-common -y &&
+add-apt-repository universe &&
 apt-get update -y &&
 apt-get install openjdk-8-jdk -y &&
 apt-get install gcc -y &&
