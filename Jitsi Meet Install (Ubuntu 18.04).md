@@ -206,7 +206,7 @@ VirtualHost "guest.jitmeet.example.com"
     allow_empty_token = true;
 ```
 
-### Enable guest domain in config.js (optional, if setted)
+### Enable guest domain in config.js
 Open your meet config in `/etc/jitsi/meet/<host>-config.js` and enable
 ```js
 var config = {
