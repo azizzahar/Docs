@@ -60,7 +60,7 @@ apt-get install nginx -y &&
 wget -qO - https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add - &&
 sh -c "echo 'deb https://download.jitsi.org stable/' > /etc/apt/sources.list.d/jitsi-stable.list" &&
 apt-get -y update &&
-apt-get install jitsi-meet -y &&
+apt-get install --no-install-recommends jitsi-meet -y &&
 apt-get install jitsi-meet-tokens -y
 ```
 
