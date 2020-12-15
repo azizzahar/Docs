@@ -72,6 +72,30 @@ apt-get install --no-install-recommends jitsi-meet -y &&
 apt-get install jitsi-meet-tokens -y
 ```
 
+# Set up the Fully Qualified Domain Name (FQDN)
+If the machine used to host the Jitsi Meet instance has a FQDN (for example meet.example.org) already set up in DNS, you can set it with the following command:
+ex: for aquarium.whynotblue.com, SUBDOMAIN = aquarium
+
+```bash
+sudo hostnamectl set-hostname SUBDOMAIN
+```
+
+Then add the same FQDN in the /etc/hosts file, associating it with the loopback address:
+```bash
+127.0.0.1 localhost
+x.x.x.x SUBDOMAIN.example.org SUBDOMAIN
+```
+Note: x.x.x.x is your server's public IP address.
+
+Finally on the same machine test that you can ping the FQDN with:
+```bash
+ping "$(hostname)"
+```
+If all worked as expected, you should see: SUBDOMAIN.example.com
+
+
+
+
 # Generate a Let's Encrypt certificate
 In order to have encrypted communications, you need a TLS certificate. The easiest way is to use Let's Encrypt.
 
