@@ -304,7 +304,7 @@ modules_enabled = {
 ```
 Restart the services
 ```bash
-systemctl restart prosody jicofo jitsi-videobridge2 jigasi
+systemctl restart prosody jicofo jitsi-videobridge2
 ```
 
 
@@ -312,7 +312,7 @@ systemctl restart prosody jicofo jitsi-videobridge2 jigasi
 
 Restart all services
 ```bash
-systemctl restart prosody jicofo jitsi-videobridge2 jigasi
+systemctl restart prosody jicofo jitsi-videobridge2
 ```
 
 Prosody logs
