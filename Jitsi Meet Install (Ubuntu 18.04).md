@@ -265,7 +265,7 @@ Then, restart all services
 systemctl restart nginx prosody jicofo jitsi-videobridge2
 ```
 
-# Setup and configure your firewall
+# Setup and configure your firewall (should be done with Google Cloud's "jitsi-server" firewall rule)
 The following ports need to be open in your firewall, to allow traffic to the Jitsi Meet server:
 
 - 80 TCP - for SSL certificate verification / renewal with Let's Encrypt
@@ -275,6 +275,9 @@ The following ports need to be open in your firewall, to allow traffic to the Ji
 - 3478 UDP - for quering the stun server (coturn, optional, needs config.js change to enable it)
 - 5349 TCP - for fallback network video/audio communications over TCP (when UDP is blocked for example), served by coturn
 - 5347 TCP
+
+
+# Now stop and test. Don't forget the jwt token in the url 
 
 
 # Token moderation installation
