@@ -196,7 +196,7 @@ Component "conference.jitmeet.example.com" "muc"
     modules_enabled = { "token_verification" }
 ```
 
-### Setup guest domain
+### Setup guest domain (optional)
 ```
 VirtualHost "guest.jitmeet.example.com"
     authentication = "token";
@@ -206,7 +206,7 @@ VirtualHost "guest.jitmeet.example.com"
     allow_empty_token = true;
 ```
 
-### Enable guest domain in config.js
+### Enable guest domain in config.js (optional, if setted)
 Open your meet config in `/etc/jitsi/meet/<host>-config.js` and enable
 ```js
 var config = {
