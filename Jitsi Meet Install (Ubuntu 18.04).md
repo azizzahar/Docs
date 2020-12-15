@@ -97,6 +97,11 @@ ufw allow in 5349/tcp &&
 ufw allow in 10000:20000/udp
 ```
 
+Check the firewall status with:
+```bash
+ufw status verbose
+```
+
 # Config prosody
 
 Open `/etc/prosody/prosody.cfg.lua` and
@@ -237,24 +242,9 @@ The following ports need to be open in your firewall, to allow traffic to the Ji
 22 TCP - if you access you server using SSH (change the port accordingly if it's not 22)
 3478 UDP - for quering the stun server (coturn, optional, needs config.js change to enable it)
 5349 TCP - for fallback network video/audio communications over TCP (when UDP is blocked for example), served by coturn
+5347 TCP
 
-## (Optional) UFW 
-If you are using ufw, you can use the following commands:
-```bash
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw allow 10000/udp
-sudo ufw allow 22/tcp
-sudo ufw allow 3478/udp
-sudo ufw allow 5349/tcp
-sudo ufw allow 5347/tcp
-sudo ufw enable
-```
 
-Check the firewall status with:
-```bash
-sudo ufw status verbose
-```
 
 # Helpers
 
