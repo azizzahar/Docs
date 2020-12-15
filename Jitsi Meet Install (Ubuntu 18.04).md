@@ -1,3 +1,5 @@
+If you use the prepared images, go directly to <a name="#altstart">this section</a>
+
 # Install lua and dependencies
 
 Enter in sudo user
@@ -59,7 +61,13 @@ cp /etc/prosody/certs/localhost.key /etc/ssl &&
 apt-get install nginx -y &&
 wget -qO - https://download.jitsi.org/jitsi-key.gpg.key | sudo apt-key add - &&
 sh -c "echo 'deb https://download.jitsi.org stable/' > /etc/apt/sources.list.d/jitsi-stable.list" &&
-apt-get -y update &&
+apt-get -y update
+```
+
+[Start Here if using the prepared image](#altstart) and ignore the "Config prosody" section
+
+Now install Jitsi 
+```bash
 apt-get install --no-install-recommends jitsi-meet -y &&
 apt-get install jitsi-meet-tokens -y
 ```
@@ -77,7 +85,7 @@ Simply run the following in your shell:
 
 Note that this script uses the HTTP-01 challenge type and thus your instance needs to be accessible from the public internet. If you want to use a different challenge type, don't use this script and instead choose I want to use my own certificate during jitsi-meet installation.
 
-# Open necessary ports
+# Open necessary ports (optional)
 
 Enable ufw 
 ```bash
