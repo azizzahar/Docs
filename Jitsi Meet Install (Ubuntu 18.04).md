@@ -93,6 +93,7 @@ ufw allow in 443/tcp &&
 ufw allow in 4443/tcp &&
 ufw allow in 5222/tcp &&
 ufw allow in 5347/tcp &&
+ufw allow in 5349/tcp &&
 ufw allow in 10000:20000/udp
 ```
 
@@ -187,6 +188,7 @@ var config = {
 ### Edit jicofo sip-communicator in `/etc/jitsi/jicofo/sip-communicator.properties`
 ```
 org.jitsi.jicofo.auth.URL=XMPP:jitmeet.example.com
+org.jitsi.jicofo.auth.URL=XMPP:YOUR_DOMAIN
 org.jitsi.jicofo.auth.DISABLE_AUTOLOGIN=true
 ```
 
@@ -195,6 +197,14 @@ SET the follow configs
 ```
 JICOFO_HOST=jitmeet.example.com
 ```
+
+### (NAT) Edit videobridge sip-communicator in `/etc/jitsi/videobridge/sip-communicator.properties`
+Add the following lines with correct IPs
+```
+org.ice4j.ice.harvest.NAT_HARVESTER_LOCAL_ADDRESS=<Local.IP.Address>
+org.ice4j.ice.harvest.NAT_HARVESTER_PUBLIC_ADDRESS=<Public.IP.Address>
+```
+And comment the line that starts with "org.ice4j.ice.harvest.STUN_MAPPING_HARVESTER_ADDRESSES..."
 
 ### And edit videobridge config in `/etc/jitsi/videobridge/config`
 
@@ -218,6 +228,33 @@ Then, restart all services
 systemctl restart nginx prosody jicofo jitsi-videobridge2
 ```
 
+# Setup and configure your firewall
+The following ports need to be open in your firewall, to allow traffic to the Jitsi Meet server:
+
+80 TCP - for SSL certificate verification / renewal with Let's Encrypt
+443 TCP - for general access to Jitsi Meet
+10000 UDP - for general network video/audio communications
+22 TCP - if you access you server using SSH (change the port accordingly if it's not 22)
+3478 UDP - for quering the stun server (coturn, optional, needs config.js change to enable it)
+5349 TCP - for fallback network video/audio communications over TCP (when UDP is blocked for example), served by coturn
+
+## (Optional) UFW 
+If you are using ufw, you can use the following commands:
+```bash
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 10000/udp
+sudo ufw allow 22/tcp
+sudo ufw allow 3478/udp
+sudo ufw allow 5349/tcp
+sudo ufw allow 5347/tcp
+sudo ufw enable
+```
+
+Check the firewall status with:
+```bash
+sudo ufw status verbose
+```
 
 # Helpers
 
