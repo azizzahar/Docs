@@ -64,7 +64,7 @@ sh -c "echo 'deb https://download.jitsi.org stable/' > /etc/apt/sources.list.d/j
 apt-get -y update
 ```
 
-# Start Here if using the prepared image and ignore the Config prosody section
+# Start Here if using the prepared image. Ignore the Config prosody section
 
 Now install Jitsi 
 ```bash
@@ -110,7 +110,7 @@ Check the firewall status with:
 ufw status verbose
 ```
 
-# Config prosody
+# Config prosody (ignore if using prepared image)
 
 Open `/etc/prosody/prosody.cfg.lua` and
 
