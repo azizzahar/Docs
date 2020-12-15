@@ -1,4 +1,4 @@
-If you use the prepared images, go directly to <a name="#altstart">this section</a>
+If you use the prepared images, go directly to [this section](#)
 
 # Install lua and dependencies
 
@@ -64,7 +64,7 @@ sh -c "echo 'deb https://download.jitsi.org stable/' > /etc/apt/sources.list.d/j
 apt-get -y update
 ```
 
-[Start Here if using the prepared image](#altstart) and ignore the "Config prosody" section
+# Start Here if using the prepared image and ignore the Config prosody section
 
 Now install Jitsi 
 ```bash
