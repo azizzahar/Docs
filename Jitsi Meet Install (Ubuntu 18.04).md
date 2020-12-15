@@ -11,6 +11,10 @@ After finish, VM will be restarted
 ```bash
 cd &&
 apt-get update -y &&
+apt-get install apt-transport-https &&
+apt-add-repository universe &&
+apt-get update -y &&
+apt-get install openjdk-8-jdk -y &&
 apt-get install gcc -y &&
 apt-get install unzip -y &&
 apt-get install lua5.2 -y &&
