@@ -64,7 +64,7 @@ apt-get install --no-install-recommends jitsi-meet -y &&
 apt-get install jitsi-meet-tokens -y
 ```
 
-# Generate a Let's Encrypt certificate (optional, recommended)
+# Generate a Let's Encrypt certificate
 In order to have encrypted communications, you need a TLS certificate. The easiest way is to use Let's Encrypt.
 
 Note: Jitsi Meet mobile apps require a valid certificate signed by a trusted Certificate Authority (such as a Let's Encrypt certificate) and will not be able to connect to your server if you choose a self-signed certificate.
@@ -130,7 +130,7 @@ Include "conf.d/*.cfg.lua"
 
 # Prosody manual plugin configuration
 
-### Setup issuers and audiences 
+### Setup issuers and audiences (not needed? works without)
 
 Open `/etc/prosody/conf.avail/<host>.cfg.lua`
 
@@ -141,7 +141,7 @@ asap_accepted_issuers = { "jitsi", "smash" }
 asap_accepted_audiences = { "jitsi", "smash" }
 ```
 
-### Under you domain config change authentication to "token" and provide application ID, secret and optionally token lifetime:
+### Under you domain config change authentication to "token" and provide application ID, secret and optionally token lifetime (made automaticaly by jitsi-meet-token installation):
 
 ```
 VirtualHost "jitmeet.example.com"
@@ -157,7 +157,7 @@ VirtualHost "jitmeet.example.com"
     modules_enabled = { "presence_identity" }
 ```
 
-### Enable room name token verification plugin in your MUC component config section:
+### Enable room name token verification plugin in your MUC component config section (made automaticaly by jitsi-meet-token installation):
 
 ```
 Component "conference.jitmeet.example.com" "muc"
@@ -244,6 +244,33 @@ The following ports need to be open in your firewall, to allow traffic to the Ji
 5349 TCP - for fallback network video/audio communications over TCP (when UDP is blocked for example), served by coturn
 5347 TCP
 
+
+# Token moderation installation
+Based on this prosody plugin https://github.com/nvonahsen/jitsi-token-moderation-plugin
+
+- Download this file https://github.com/azizzahar/Docs/blob/master/jitsi-files/mod_token_moderation.lua
+- Create a folder in /etc/prosody so the plugin doesn't get deleted
+```bash
+sudo mkdir /etc/prosody/plugins
+```
+- Copy the mod_token_moderation.lua file in that folder
+
+## Edit the prosody configuration /etc/prosody/conf.d/[YOUR DOMAIN].cfg.lua
+Add the newly created folder prosody plugins
+```bash
+plugin_paths = { "/usr/share/jitsi-meet/prosody-plugins/", "/etc/prosody/plugins" }
+```
+Edit the conferance.[YOUR DOMAIN] component to add token_moderation
+```bash
+modules_enabled = {
+        [...]
+        "token_moderation";
+    }
+```
+Restart the services
+```bash
+systemctl restart prosody jicofo jitsi-videobridge2 jigasi
+```
 
 
 # Helpers
