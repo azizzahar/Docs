@@ -1,4 +1,4 @@
-Made for Jitsi 2.0.5142
+Made for Jitsi 2.0.5142.
 If you use the prepared images, go directly to [this section](#start-here-if-using-the-prepared-image-and-ignore-the-config-prosody-section)
 
 # Install lua and dependencies
