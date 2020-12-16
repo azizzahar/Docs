@@ -1,3 +1,4 @@
+Made for Jitsi 2.0.5142
 If you use the prepared images, go directly to [this section](#start-here-if-using-the-prepared-image-and-ignore-the-config-prosody-section)
 
 # Install lua and dependencies
@@ -66,7 +67,8 @@ apt-get -y update
 
 # Start Here if using the prepared image. Ignore the Config prosody section
 
-Now install Jitsi 
+Now install Jitsi.
+If the Jitsi depedencies have been updated since v2.0.5142, don't forget to check if there is anything else to install before continuing - or specify the jitsi-meet version (jitsi-meet=2.0.5142)
 ```bash
 apt-get install --no-install-recommends jitsi-meet -y &&
 apt-get install jitsi-meet-tokens -y
