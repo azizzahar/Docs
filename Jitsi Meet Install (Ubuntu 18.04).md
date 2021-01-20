@@ -402,3 +402,22 @@ Restart the services
 ```bash
 systemctl restart prosody jicofo jitsi-videobridge2
 ```
+
+Add the endpoint blocs inside the domain nginx config (/etc/nginx/sites-available/domain_name.com.conf) just after the other endpoints blocs:   
+```bash
+# Room Stats (mod_muc_status.lua)
+location = /status {
+        proxy_pass      http://localhost:5280/status?domain=aquarium.whynotblue.com;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $http_host;
+}
+
+# Sessions Stats (mod_muc_status.lua)
+location = /sessions {
+        proxy_pass      http://localhost:5280/sessions;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $http_host;
+}
+```
+
+For security reasons, you should "hide" the /status and /sessions endpoints by using something more difficult to guess (as these endpoint are not pretected as is)
