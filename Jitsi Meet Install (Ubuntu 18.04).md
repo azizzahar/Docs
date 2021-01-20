@@ -384,3 +384,21 @@ server {
     ...
 }
 ```
+
+
+# Server status and session stats
+
+Install the depedencies:  
+```bash
+luarocks install basexx
+luarocks install net-url
+luarocks install luajwtjitsi
+```
+
+Place the file mod_muc_status.lua inside the prosody plugins directory (specified in domain prosody config).   
+Add "mod_status" in the main modules_enabled {} of domain and localhost prosody configs.  
+
+Restart the services   
+```bash
+systemctl restart prosody jicofo jitsi-videobridge2
+```
