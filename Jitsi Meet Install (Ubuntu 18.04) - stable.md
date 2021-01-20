@@ -388,6 +388,8 @@ server {
 
 # Server status and session stats
 
+## With mod_mus_status.lua
+
 Install the depedencies:  
 ```bash
 luarocks install basexx
@@ -420,4 +422,33 @@ location = /sessions {
 }
 ```
 
-For security reasons, you should "hide" the /status and /sessions endpoints by using something more difficult to guess (as these endpoint are not pretected as is)
+For security reasons, you should "hide" the /status and /sessions endpoints by using something more difficult to guess (as these endpoint are not pretected as is).  
+
+## With Colibri
+
+Alternatively, it's possible to use the jitsi module Colibri.  
+
+Edit the videobridge configuration file (/etc/jitsi/videobridge/config) at the api line:  
+```bash
+# extra options to pass to the JVB daemon
+JVB_OPTS="--apis=rest"
+```
+
+Edit the videobridge communicator properties (/etc/jitsi/videobridge/sip-communicator.properties):  
+```bash
+org.jitsi.videobridge.ENABLE_STATISTICS=true
+org.jitsi.videobridge.STATISTICS_TRANSPORT=muc,colibri
+```
+
+Restart the videobridge:  
+```bash
+service jitsi-videobridge2 restart
+```
+
+Colibri will listen by default on the localhost port 8080  
+```bash
+curl -v http://127.0.0.1:8080/colibri/stats
+```
+More informations on the API: https://github.com/jitsi/jitsi-videobridge/blob/master/doc/rest-colibri.md  
+
+You can then enable outside access to the stats by adding endpoint bloc to the nginx config, like for the mod_muc_status above.  
